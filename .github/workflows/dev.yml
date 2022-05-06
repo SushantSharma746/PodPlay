@@ -5,8 +5,7 @@ name: CI
 # Controls when the workflow will run
 on:
   push:
-    branches:
-      - 'master'
+    branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -21,7 +20,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
@@ -35,18 +34,17 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-
     steps: #1
       - name: Run a log message #2
         run: echo This is my job for running tests! #3
 
-      - uses: actions/checkout@v2 #1
+      - uses: actions/checkout@v2
 
-      - name: set up JDK #2
-        uses: actions/setup-java@v1 #3
+      - name: set up JDK
+        uses: actions/setup-java@v1
         with:
-          java-version: 11 #4
+          java-version: 11
 
       - name: Unit tests
-        run: ./gradlew test #5
+        run: ./gradlew test
 
